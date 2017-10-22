@@ -36,7 +36,9 @@ namespace Swashbuckle.Examples
 
                     // name = attr.RequestType.Name; // this doesn't work for generic types, so need to to schema.ref split
 
-                    var parts = schema.@ref?.Split('/');
+                    // var parts = schema.@ref?.Split('/');
+                    var parts = (schema.type??string.Empty).Equals("array") ? schema.items.@ref?.Split('/') : schema.@ref?.Split('/');
+
                     if (parts == null)
                     {
                         continue;
